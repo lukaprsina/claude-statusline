@@ -15,31 +15,39 @@ Needs Claude Code 2.1.251 or later for `prompt_cache`. Output is plain text: no 
 
 The clock is computed from the wall clock each time the command runs, so every drawn value is right; a skipped second is only refresh-scheduling jitter.
 
-## Install (Rust)
+## Install
+
+Prebuilt binaries for Linux x86_64, macOS arm64, and Windows x86_64 are on the [releases page](https://github.com/lukaprsina/claude-statusline/releases).
+
+macOS / Linux:
 
 ```bash
-cargo build --release
-mkdir -p ~/.claude/bin
-cp target/release/claude-statusline.exe ~/.claude/bin/   # no .exe on Linux/macOS
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/lukaprsina/claude-statusline/releases/latest/download/claude-statusline-installer.sh | sh
 ```
+
+Windows (PowerShell):
+
+```powershell
+powershell -ExecutionPolicy Bypass -c "irm https://github.com/lukaprsina/claude-statusline/releases/latest/download/claude-statusline-installer.ps1 | iex"
+```
+
+The installers put the binary in `~/.cargo/bin` (`%USERPROFILE%\.cargo\bin` on Windows).
 
 Add to `~/.claude/settings.json` and restart Claude Code:
 
 ```json
 "statusLine": {
   "type": "command",
-  "command": "~/.claude/bin/claude-statusline.exe",
+  "command": "~/.cargo/bin/claude-statusline",
   "refreshInterval": 1
 }
 ```
 
-`refreshInterval` (seconds, minimum 1) re-runs the command so the clock ticks. If nothing shows, write the full path with forward slashes (`C:/Users/<you>/.claude/bin/claude-statusline.exe`); `~` is expanded by the shell the command runs in.
+`refreshInterval` (seconds, minimum 1) re-runs the command so the clock ticks. If nothing shows, write the full path with forward slashes (`C:/Users/<you>/.cargo/bin/claude-statusline.exe`); `~` is expanded by the shell the command runs in.
 
-Copy the exe rather than pointing at `target/release`, so rebuilding is never blocked by a file lock.
+## Node alternative
 
-## Install (Node)
-
-`statusline.mjs` is the same logic with no build step. Needs Node 18 or later.
+`statusline.mjs` is the same logic with no binary to install. Needs Node 18 or later.
 
 ```bash
 cp statusline.mjs ~/.claude/statusline.mjs
