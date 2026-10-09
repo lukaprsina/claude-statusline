@@ -1,10 +1,9 @@
 [package]
 name = "claude-statusline"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "A Claude Code status line showing context window fill and prompt cache expiry countdown"
 license = "MIT"
-homepage = "https://github.com/lukaprsina/claude-statusline"
 repository = "https://github.com/lukaprsina/claude-statusline"
 documentation = "https://github.com/lukaprsina/claude-statusline#readme"
 

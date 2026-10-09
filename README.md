@@ -8,7 +8,7 @@ ctx 147k/1M 15% · 4:29
 
 - **`ctx`**: `context_window` from the payload Claude Code sends on stdin: tokens in the last response, the model's window, percent used. It is filled right after `/resume`, before any response.
 - **clock**: time left on the prompt cache, from `prompt_cache.expires_at` (exact, so it follows whatever TTL is in effect). Shows `cache expired` once it runs out.
-- **`~m:ss`**: before a session's first response (a just-resumed session) there is no `prompt_cache` yet, so the clock is estimated from the transcript's last assistant message plus 5 minutes. The `~` marks it as approximate.
+- **no clock**: before a session's first response (a just-resumed session) there is no `prompt_cache` yet, so only `ctx` is shown rather than guessing a TTL.
 - **`ctx --`**: nothing to show yet (fresh session).
 
 Needs Claude Code 2.1.251 or later for `prompt_cache`. Output is plain text: no prefix, no branding.
